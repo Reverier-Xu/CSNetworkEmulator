@@ -2,12 +2,11 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtGraphicalEffects 1.15
 import Qt.labs.platform 1.1
-import "../components"
+import "qrc:/components"
 
 Rectangle {
     id: root
-    color: display.colorStyle ? "#a0ffffff":"#d0000000"
-    opacity: display.mouseIsActive ? 1 : 0
+    color: "transparent"
     Behavior on opacity {
         NumberAnimation {
             duration: 100

@@ -29,15 +29,14 @@ void AppManager::initialize() {
 
 void AppManager::registerTypes() { qRegisterMetaType<DataFrame>("DataFrame"); }
 
-AppManager::~AppManager() {
-}
+AppManager::~AppManager() {}
 
 void detectPaths() {
     auto dataPath =
         QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     auto cachePath =
         QStandardPaths::writableLocation(QStandardPaths::TempLocation) +
-        "/BitWave";
+        "/CSNetworkEmulator";
     QDir dir;
     QStringList dataPaths = { "/Database" };
     QStringList cachePaths = { "/Covers", "/CachedSongs" };

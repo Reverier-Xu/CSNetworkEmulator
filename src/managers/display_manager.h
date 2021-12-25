@@ -13,21 +13,21 @@
 
 class DisplayManager : public QObject {
     Q_OBJECT
-        Q_PROPERTY(bool colorStyle MEMBER mColorStyle READ colorStyle WRITE
-            setColorStyle NOTIFY colorStyleChanged)
-        Q_PROPERTY(QColor themeColor MEMBER mThemeColor READ themeColor WRITE
-            setThemeColor NOTIFY themeColorChanged)
-        Q_PROPERTY(QColor contentColor READ contentColor WRITE setContentColor
-            NOTIFY contentColorChanged)
-        Q_PROPERTY(QColor alertColor MEMBER mAlertColor READ alertColor WRITE
-            setAlertColor NOTIFY alertColorChanged)
+    Q_PROPERTY(bool colorStyle READ colorStyle WRITE setColorStyle NOTIFY
+                   colorStyleChanged)
+    Q_PROPERTY(QColor themeColor READ themeColor WRITE setThemeColor NOTIFY
+                   themeColorChanged)
+    Q_PROPERTY(QColor contentColor READ contentColor WRITE setContentColor
+                   NOTIFY contentColorChanged)
+    Q_PROPERTY(QColor alertColor READ alertColor WRITE setAlertColor NOTIFY
+                   alertColorChanged)
 
-private:
+   private:
     bool mColorStyle = false;
     QColor mThemeColor = QColor(0x00, 0x78, 0xd6);
     QColor mAlertColor = QColor(0xff, 0x60, 0x33);
 
-protected:
+   protected:
     explicit DisplayManager(QObject* parent);
 
     ~DisplayManager() override;
@@ -38,7 +38,7 @@ protected:
 
     static DisplayManager* mInstance;
 
-public:
+   public:
     static DisplayManager* instance(QObject* parent = nullptr);
 
     [[nodiscard]] bool colorStyle() const;
@@ -61,7 +61,7 @@ public:
 
     void setContentColor(const QColor& value);
 
-signals:
+   signals:
 
     void colorStyleChanged(bool n);
 
@@ -71,4 +71,3 @@ signals:
 
     void contentColorChanged(QColor n);
 };
-
