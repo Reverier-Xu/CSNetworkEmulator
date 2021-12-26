@@ -8,6 +8,7 @@
 #include <QApplication>
 #include <QObject>
 #include <QIcon>
+#include <QFont>
 
 #include "managers/app_manager.h"
 
@@ -22,6 +23,9 @@ int main(int argc, char* argv[]) {
 	QApplication::setOrganizationName("Wootec");
 	QApplication::setOrganizationDomain("woooo.tech");
 	QApplication::setWindowIcon(QIcon(":/assets/simulation.svg"));
+#ifdef Q_OS_WINDOWS
+	QApplication::setFont(QFont("Microsoft YaHei UI"));
+#endif
 
 	auto main_app = AppManager();
 	main_app.initialize();

@@ -17,7 +17,7 @@ FluentWindow {
         anchors.margins: window.visibility === Window.Windowed ? 10 : 0
         border.width: window.visibility === Window.Windowed ? 1 : 0
         border.color: "#40606060"
-        color: display.colorStyle? "#e0e0e0" : "#151515"
+        color: display.colorStyle? "white" : "black"
 
         Behavior on color {
             ColorAnimation {
@@ -35,13 +35,33 @@ FluentWindow {
             anchors.rightMargin: window.visibility === Window.Windowed ? 1 : 0
         }
 
-        // ControlBar {
-        //     id: controlBar
-        //     anchors.left: parent.left
-        //     anchors.top: titleBar.bottom
-        //     anchors.right: parent.right
-        //     anchors.leftMargin: window.visibility === Window.Windowed ? 1 : 0
-        //     anchors.rightMargin: window.visibility === Window.Windowed ? 1 : 0
-        // }
+        ControlBar {
+            id: controlBar
+            anchors.left: parent.left
+            anchors.top: titleBar.bottom
+            anchors.right: parent.right
+            anchors.leftMargin: window.visibility === Window.Windowed ? 1 : 0
+            anchors.rightMargin: window.visibility === Window.Windowed ? 1 : 0
+        }
+
+        LogWindow {
+            id: logWindow
+            anchors.left: parent.left
+            anchors.top: controlBar.bottom
+            anchors.bottom: parent.bottom
+            width: 400
+            anchors.leftMargin: window.visibility === Window.Windowed ? 1 : 0
+            anchors.bottomMargin: window.visibility === Window.Windowed ? 1 : 0
+        }
+
+        Player {
+            id: player
+            anchors.left: logWindow.right
+            anchors.right: parent.right
+            anchors.top: controlBar.bottom
+            anchors.bottom: parent.bottom
+            anchors.rightMargin: window.visibility === Window.Windowed ? 1 : 0
+            anchors.bottomMargin: window.visibility === Window.Windowed ? 1 : 0
+        }
     }
 }

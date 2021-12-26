@@ -94,11 +94,9 @@
         <file>assets/up.svg</file>
         <file>assets/warning.svg</file>
         <file>components/CheckBox.qml</file>
-        <file>components/CircleSliderArea.qml</file>
-        <file>components/CircleSliderButton.qml</file>
         <file>components/ContentMenu.qml</file>
         <file>components/FluentWindow.qml</file>
-        <file>components/HorizontalStepSlider.qml</file>
+        <file>components/FrameObject.qml</file>
         <file>components/IconButton.qml</file>
         <file>components/InputArea.qml</file>
         <file>components/InputBox.qml</file>
@@ -114,9 +112,9 @@
         <file>components/TextLabel.qml</file>
         <file>components/UXScrollBar.qml</file>
         <file>views/ControlBar.qml</file>
+        <file>views/LogWindow.qml</file>
         <file>views/MainWindow.qml</file>
-        <file>views/ReceiverStation.qml</file>
-        <file>views/SenderStation.qml</file>
+        <file>views/Player.qml</file>
         <file>views/TitleBar.qml</file>
     </qresource>
 </RCC>

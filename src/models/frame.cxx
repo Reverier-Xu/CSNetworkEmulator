@@ -7,42 +7,21 @@
 #include "frame.h"
 
 DataFrame::DataFrame(QObject* parent) : QObject(parent) {
-
+    // TODO
 }
 
 DataFrame::DataFrame(const DataFrame& another) {
-	type_ = another.type();
-	data_ = another.data();
+    // TODO
 }
 
 DataFrame::~DataFrame() = default;
 
 DataFrame& DataFrame::operator=(const DataFrame& another) {
-	type_ = another.type();
-	data_ = another.data();
+    // TODO
 	return *this;
 }
 
 DataFrame& DataFrame::operator=(char another) {
-	type_ = FrameType::Data;
-	data_ = another;
+    // TODO
 	return *this;
-}
-
-FrameType DataFrame::type() const {
-	return type_;
-}
-
-void DataFrame::setType(const FrameType& n) {
-	type_ = n;
-	emit typeChanged(n);
-}
-
-char DataFrame::data() const {
-	return data_;
-}
-
-void DataFrame::setData(char n) {
-	data_ = n;
-	emit dataChanged(n);
 }

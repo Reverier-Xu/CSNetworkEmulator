@@ -7,21 +7,24 @@
 
 #include <QObject>
 
-enum FrameType {
-	// ignore emulation-not-related types and subtypes.
-	ACK = 1,
-	Data = 2
-};
+const char FRAME_TAG = 0x7e;
+
 
 class DataFrame : public QObject {
-	// this application just emulate ARQ,
-	// the frame structure is not compeleted.
+	// this application just emulate.
 	Q_OBJECT
-		Q_PROPERTY(FrameType type READ type WRITE setType NOTIFY typeChanged)
-		Q_PROPERTY(char data READ data WRITE setData NOTIFY dataChanged)
+        Q_PROPERTY(char address READ address WRITE setAddress NOTIFY addressChanged)
+        Q_PROPERTY(char data READ data WRITE setData NOTIFY dataChanged)
+        Q_PROPERTY(char control READ control WRITE setControl NOTIFY controlChanged)
+        Q_PROPERTY(QByteArray raw READ raw NOTIFY rawChanged)
 private:
-	FrameType type_;
-	char data_;
+    char startTag_ = FRAME_TAG;
+
+    char address_ = 0;
+    char control_ = 0;
+    char data_ = 0;
+
+    char endTag_ = FRAME_TAG;
 
 public:
 	explicit DataFrame(QObject* parent=nullptr);
@@ -34,16 +37,23 @@ public:
 
 	DataFrame& operator=(char another);
 
-	[[nodiscard]] FrameType type() const;
+    [[nodiscard]] char address() const;
 
-	void setType(const FrameType& n);
+    void setAddress(char n);
 
-	[[nodiscard]] char data() const;
+    [[nodiscard]] char control() const;
 
-	void setData(char n);
+    void setControl(char n);
+
+    [[nodiscard]] char data() const;
+
+    void setData(char n);
 
 signals:
-	void typeChanged(FrameType n);
+    void addressChanged(char n);
 
-	void dataChanged(char n);
+    void controlChanged(char n);
+
+    void dataChanged(char n);
+
 };

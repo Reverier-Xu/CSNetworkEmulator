@@ -6,12 +6,7 @@ import "qrc:/components"
 
 Rectangle {
     id: root
-    color: "transparent"
-    Behavior on opacity {
-        NumberAnimation {
-            duration: 100
-        }
-    }
+    color: display.colorStyle ? "#20000000" : "#20FFFFFF"
     Behavior on color {
         ColorAnimation {
             duration: 280
@@ -55,29 +50,11 @@ Rectangle {
     }
 
     IconButton {
-        id: fullscreenButton
-        width: 54
-        height: 32
-        iconSize: 16
-        flat: true
-        anchors.right: maximizeButton.left
-        anchors.top: parent.top
-        border.color: "transparent"
-        icon: window.visibility === Window.FullScreen ? "qrc:/assets/exit-fullscreen.svg" : "qrc:/assets/enter-fullscreen.svg"
-        onClicked: {
-            if (window.visibility === Window.FullScreen)
-                window.showNormal();
-            else
-                window.showFullScreen();
-        }
-    }
-
-    IconButton {
         id: minimizeButton
         icon: "qrc:/assets/minimize.svg"
         iconSize: 16
         flat: true
-        anchors.right: fullscreenButton.left
+        anchors.right: maximizeButton.left
         anchors.top: parent.top
         border.color: "transparent"
         width: 54
@@ -104,8 +81,8 @@ Rectangle {
 
     PushButton {
         id: titleButton
-        icon: "qrc:/assets/navigation.svg"
-        text: qsTr("Network Emulator")
+        icon: "qrc:/assets/simulation.svg"
+        text: "选择重发ARQ算法"
         anchors.left: parent.left
         anchors.top: parent.top
         height: 32
