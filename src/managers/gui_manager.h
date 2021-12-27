@@ -4,7 +4,6 @@
  * Date: 2021.12.26
  */
 
-
 #pragma once
 
 #include <QObject>
@@ -12,15 +11,15 @@
 
 class GuiManager : public QObject {
     Q_OBJECT
-private:
+   private:
     QQmlApplicationEngine* mUiEngine;
 
-protected:
+   protected:
     explicit GuiManager(QObject* parent);
 
     static GuiManager* mInstance;
 
-public:
+   public:
     static GuiManager* instance(QObject* parent = nullptr);
 
     void createUI();
@@ -29,4 +28,3 @@ public:
 
     static void exportComponents();
 };
-

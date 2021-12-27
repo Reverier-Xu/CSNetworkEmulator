@@ -4,7 +4,6 @@
  * Date: 2021.12.26
  */
 
-
 #include "display_manager.h"
 
 #include <QApplication>
@@ -83,4 +82,3 @@ QColor DisplayManager::contentColor() const {
 void DisplayManager::setContentColor(const QColor& value) {
     emit contentColorChanged(contentColor());
 }
-

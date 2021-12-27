@@ -4,12 +4,12 @@
  * Date: 2021.12.26
  */
 
+#include "app_manager.h"
 
 #include <QDir>
 #include <QStandardPaths>
 #include <QThread>
 
-#include "app_manager.h"
 #include "gui_manager.h"
 #include "models/frame.h"
 
@@ -24,7 +24,6 @@ void AppManager::initialize() {
     GuiManager::exportComponents();
     guiManager->exportManagers();
     guiManager->createUI();
-
 }
 
 void AppManager::registerTypes() { qRegisterMetaType<DataFrame>("DataFrame"); }
@@ -38,8 +37,8 @@ void detectPaths() {
         QStandardPaths::writableLocation(QStandardPaths::TempLocation) +
         "/CSNetworkEmulator";
     QDir dir;
-    QStringList dataPaths = { "/Database" };
-    QStringList cachePaths = { "/Covers", "/CachedSongs" };
+    QStringList dataPaths = {"/Database"};
+    QStringList cachePaths = {"/Covers", "/CachedSongs"};
     for (auto& i : dataPaths)
         if (!dir.exists(dataPath + i)) dir.mkpath(dataPath + i);
     for (auto& i : cachePaths)

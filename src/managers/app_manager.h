@@ -10,9 +10,7 @@
 
 class AppManager : public QObject {
     Q_OBJECT
-private:
-
-public:
+   public:
     explicit AppManager(QObject* parent = nullptr);
 
     ~AppManager() override;
