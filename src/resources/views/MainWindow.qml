@@ -6,10 +6,10 @@ import "qrc:/components"
 FluentWindow {
     id: window
     objectName: "mainWindow"
-    width: 1200
-    minimumWidth: 1200
-    height: 700
-    minimumHeight: 700
+    width: 1500
+    minimumWidth: 1500
+    height: 900
+    minimumHeight: 900
 
     Rectangle {
         id: centralWidget
@@ -49,7 +49,7 @@ FluentWindow {
             anchors.left: parent.left
             anchors.top: controlBar.bottom
             anchors.bottom: parent.bottom
-            width: 400
+            width: 600
             anchors.leftMargin: window.visibility === Window.Windowed ? 1 : 0
             anchors.bottomMargin: window.visibility === Window.Windowed ? 1 : 0
         }

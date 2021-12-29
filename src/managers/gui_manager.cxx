@@ -17,6 +17,17 @@ GuiManager* GuiManager::mInstance = nullptr;
 
 GuiManager::GuiManager(QObject* parent) : QObject(parent) {
     mUiEngine = new QQmlApplicationEngine(this);
+    mBridge = new Bridge(this);
+    mReceiver = new StationReceiver(this);
+    mSender = new StationSender(this);
+    mSenderLogsModel = new LogsModel(this);
+    mReceiverLogsModel = new LogsModel(this);
+    mSender->setLogsModel(mSenderLogsModel);
+    mReceiver->setLogsModel(mReceiverLogsModel);
+    connect(mBridge, &Bridge::senderReceived, mSender, &StationSender::onFrameReceived);
+    connect(mBridge, &Bridge::receiverReceived, mReceiver, &StationReceiver::onFrameReceived);
+    connect(mSender, &StationSender::frameSendRequested, mBridge, &Bridge::onSenderRequested);
+    connect(mReceiver, &StationReceiver::frameSendRequested, mBridge, &Bridge::onReceiverRequested);
 }
 
 void GuiManager::createUI() {
@@ -24,9 +35,14 @@ void GuiManager::createUI() {
     mUiEngine->load(url);
 }
 
-void GuiManager::exportManagers() {
+void GuiManager::exportObjects() {
     mUiEngine->rootContext()->setContextProperty(
         "display", DisplayManager::instance(this->parent()));
+    mUiEngine->rootContext()->setContextProperty("bridge", mBridge);
+    mUiEngine->rootContext()->setContextProperty("receiver", mReceiver);
+    mUiEngine->rootContext()->setContextProperty("sender", mSender);
+    mUiEngine->rootContext()->setContextProperty("senderLogsModel", mSenderLogsModel);
+    mUiEngine->rootContext()->setContextProperty("receiverLogsModel", mReceiverLogsModel);
 }
 
 GuiManager* GuiManager::instance(QObject* parent) {

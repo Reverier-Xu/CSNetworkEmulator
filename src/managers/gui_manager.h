@@ -9,10 +9,20 @@
 #include <QObject>
 #include <QQmlApplicationEngine>
 
+#include "devices/bridge.h"
+#include "devices/station_receiver.h"
+#include "devices/station_sender.h"
+#include "models/ui/logs_model.h"
+
 class GuiManager : public QObject {
     Q_OBJECT
    private:
     QQmlApplicationEngine* mUiEngine;
+    Bridge* mBridge;
+    StationReceiver* mReceiver;
+    StationSender* mSender;
+    LogsModel* mSenderLogsModel;
+    LogsModel* mReceiverLogsModel;
 
    protected:
     explicit GuiManager(QObject* parent);
@@ -24,7 +34,7 @@ class GuiManager : public QObject {
 
     void createUI();
 
-    void exportManagers();
+    void exportObjects();
 
     static void exportComponents();
 };

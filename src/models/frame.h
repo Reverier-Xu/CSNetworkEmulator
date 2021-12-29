@@ -65,10 +65,14 @@ class DataFrame : public QObject {
 
     [[nodiscard]] bool isAckFrame() const;
 
+    [[nodiscard]] bool isNakFrame() const;
+
    public slots:
     Q_INVOKABLE void parse(QByteArray raw);
 
     Q_INVOKABLE void setAck(char id);
+
+    Q_INVOKABLE void setNak(char id);
 
     Q_INVOKABLE void setData(char id, char data);
 

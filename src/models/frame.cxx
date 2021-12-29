@@ -88,6 +88,10 @@ bool DataFrame::isAckFrame() const {
     return isControlFrame() && !(control_ >> 5 & 1) && !(control_ >> 4 & 1);
 }
 
+bool DataFrame::isNakFrame() const {
+    return isControlFrame() && (control_ >> 5 & 1) && !(control_ >> 4 & 1);
+}
+
 void DataFrame::parse(QByteArray n) {
     if (n.size() < 5) {
         return;
@@ -110,6 +114,12 @@ void DataFrame::parse(QByteArray n) {
 void DataFrame::setAck(char id) {
     setAddress(id);
     setControl(1 << 7);
+    setData(0);
+}
+
+void DataFrame::setNak(char id) {
+    setAddress(id);
+    setControl(1 << 7 & 1 << 5);
     setData(0);
 }
 

@@ -22,7 +22,7 @@ void AppManager::initialize() {
     detectPaths();
     auto guiManager = GuiManager::instance(this);
     GuiManager::exportComponents();
-    guiManager->exportManagers();
+    guiManager->exportObjects();
     guiManager->createUI();
 }
 
@@ -33,14 +33,8 @@ AppManager::~AppManager() {}
 void detectPaths() {
     auto dataPath =
         QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-    auto cachePath =
-        QStandardPaths::writableLocation(QStandardPaths::TempLocation) +
-        "/CSNetworkEmulator";
     QDir dir;
     QStringList dataPaths = {"/Database"};
-    QStringList cachePaths = {"/Covers", "/CachedSongs"};
     for (auto& i : dataPaths)
         if (!dir.exists(dataPath + i)) dir.mkpath(dataPath + i);
-    for (auto& i : cachePaths)
-        if (!dir.exists(cachePath + i)) dir.mkpath(cachePath + i);
 }

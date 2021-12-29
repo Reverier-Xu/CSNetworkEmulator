@@ -2,19 +2,17 @@ import QtQuick 2.15
 
 Rectangle {
     id: root
-    property int frameStatus: 0 // 0 is undefined, 1 is sent, 2 is droped
-    property alias frameData: innerText.text
-    width: 64
+    property bool frameStatus: false
+    width: 32
     height: 32
-    color: frameStatus == 0 ? "#20808080" : (frameStatus == 1 ? display.themeColor : display.alertColor)
-    border.width: 2
-    radius: 2
-    border.color: "#10000000"
+    color: "transparent"
 
-    Text {
-        id: innerText
+    Rectangle {
+        id: content
         anchors.centerIn: parent
-        font.pixelSize: 16
-        color: frameStatus == 0 ? display.contentColor : "white"
+        width: 18
+        height: 18
+        color: frameStatus ? "#009900" : "#808080"
+        radius: 4
     }
 }

@@ -8,10 +8,10 @@ set(CMAKE_MODULE_PATH
         ${CMAKE_MODULE_PATH}
         ${ECM_MODULE_PATH})
 
-qt5_add_resources(RESOURCES ./resources/main.qrc)
+qt5_add_resources(RESOURCES "resources/main.qrc")
 
-file(GLOB MODELS_SRCS "models/*.cxx")
-file(GLOB MODELS_HEADERS "models/*.h")
+file(GLOB_RECURSE MODELS_SRCS "models/*.cxx")
+file(GLOB_RECURSE MODELS_HEADERS "models/*.h")
 
 file(GLOB DEVICES_SRCS "devices/*.cxx")
 file(GLOB DEVICES_HEADERS "devices/*.h")
