@@ -13,7 +13,7 @@
 
 StationSender::StationSender(QObject* parent) : QAbstractListModel(parent) {
     timer_ = new QTimer(this);
-    timer_->setInterval(500);
+    timer_->setInterval(1700);
     connect(timer_, &QTimer::timeout, this, &StationSender::sendNextFrame);
 }
 
@@ -94,7 +94,6 @@ void StationSender::sendNextFrame() {
             // send the frame
             logsModel_->log_error("数据帧[" + QString::number(frameQueue_[i].address()) + "]超时! 重发...");
             emit frameSendRequested(frameQueue_[i].raw());
-            setBufferSendCursor(i);
             return;
         }
     } else {

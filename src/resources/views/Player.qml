@@ -170,6 +170,171 @@ Rectangle {
         }
     }
 
+    FrameObject {
+        id: sendingWithSuccessFrame
+        frameColor: "transparent"
 
+        ParallelAnimation {
+            id: toSenderAnimation
+            
+            NumberAnimation {
+                target: sendingWithSuccessFrame
+                properties: "y"
+                from: receiverStation.y + receiverFrameList.y
+                to: senderStation.y + senderFrameList.y
+                duration: 800
+                easing.type: Easing.OutQuad
+            }
+            SequentialAnimation {
+                ColorAnimation {
+                    target: sendingWithSuccessFrame
+                    properties: "frameColor"
+                    from: "#808080"
+                    to: "#009900"
+                    duration: 400
+                }
+                PauseAnimation {
+                    duration: 400
+                }
+                ColorAnimation {
+                    target: sendingWithSuccessFrame
+                    properties: "frameColor"
+                    to: "transparent"
+                    duration: 10
+                }
+            }
+        }
 
+        ParallelAnimation {
+            id: toReceiverAnimation
+            
+            NumberAnimation {
+                target: sendingWithSuccessFrame
+                properties: "y"
+                from: senderStation.y + senderFrameList.y
+                to: receiverStation.y + receiverFrameList.y
+                duration: 800
+                easing.type: Easing.OutQuad
+            }
+            SequentialAnimation {
+                ColorAnimation {
+                    target: sendingWithSuccessFrame
+                    properties: "frameColor"
+                    from: "#808080"
+                    to: "#009900"
+                    duration: 400
+                }
+                PauseAnimation {
+                    duration: 400
+                }
+                ColorAnimation {
+                    target: sendingWithSuccessFrame
+                    properties: "frameColor"
+                    to: "transparent"
+                    duration: 10
+                }
+            }
+        }
+
+        Connections {
+            target: bridge
+            function onToReceiver(id, ok) {
+                if (ok) {
+                    sendingWithSuccessFrame.x = id * 32 + 50
+                    toSenderAnimation.stop()
+                    toReceiverAnimation.start()
+                }
+            }
+            function onToSender(id, ok) {
+                if (ok) {
+                    sendingWithSuccessFrame.x = id * 32 + 50
+                    toReceiverAnimation.stop()
+                    toSenderAnimation.start()
+                }
+            }
+        }
+    }
+
+    FrameObject {
+        id: sendingWithFailureFrame
+        frameColor: "transparent"
+
+        ParallelAnimation {
+            id: toSenderFailedAnimation
+            
+            NumberAnimation {
+                target: sendingWithFailureFrame
+                properties: "y"
+                from: receiverStation.y + receiverFrameList.y
+                to: senderStation.y + senderFrameList.y
+                duration: 800
+                easing.type: Easing.OutQuad
+            }
+            SequentialAnimation {
+                ColorAnimation {
+                    target: sendingWithFailureFrame
+                    properties: "frameColor"
+                    from: "#808080"
+                    to: "#AA0000"
+                    duration: 400
+                }
+
+                ColorAnimation {
+                    target: sendingWithFailureFrame
+                    properties: "frameColor"
+                    to: "transparent"
+                    duration: 400
+                    easing.type: Easing.InQuad
+                }
+            }
+        }
+
+        ParallelAnimation {
+            id: toReceiverFailedAnimation
+            
+            NumberAnimation {
+                target: sendingWithFailureFrame
+                properties: "y"
+                from: senderStation.y + senderFrameList.y
+                to: receiverStation.y + receiverFrameList.y
+                duration: 800
+                easing.type: Easing.OutQuad
+            }
+            SequentialAnimation {
+                ColorAnimation {
+                    target: sendingWithFailureFrame
+                    properties: "frameColor"
+                    from: "#808080"
+                    to: "#AA0000"
+                    duration: 400
+                }
+
+                ColorAnimation {
+                    target: sendingWithFailureFrame
+                    properties: "frameColor"
+                    to: "transparent"
+                    duration: 400
+                    easing.type: Easing.InQuad
+                }
+            }
+        }
+
+        Connections {
+            target: bridge
+            function onToReceiver(id, ok) {
+                if (!ok) {
+                    sendingWithFailureFrame.x = id * 32 + 50
+                    toSenderFailedAnimation.stop()
+                    toReceiverFailedAnimation.start()
+                }
+            }
+            function onToSender(id, ok) {
+                if (!ok) {
+                    sendingWithFailureFrame.x = id * 32 + 50
+                    toReceiverFailedAnimation.stop()
+                    toSenderFailedAnimation.start()
+                }
+            }
+        }
+    }
 }

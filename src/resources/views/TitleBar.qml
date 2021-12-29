@@ -79,6 +79,19 @@ Rectangle {
         }
     }
 
+    TextLabel {
+        id: rxLabel
+        anchors.right: colorStyleButton.left
+        anchors.rightMargin: 12
+        anchors.verticalCenter: parent.verticalCenter
+        text: "R.X.Fx"
+        contentColor: display.alertColor
+        showIcon: false
+        color: "#30808080"
+        radius: 4
+        height: 24
+    }
+
     PushButton {
         id: titleButton
         icon: "qrc:/assets/simulation.svg"
