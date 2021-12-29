@@ -44,3 +44,7 @@ bin/CSNetworkEmulator
 ## License
 
 Mozilla Public License v2.0
+
+Author: 
+- @Reverier-Xu
+- @ll1ng
