@@ -15,7 +15,7 @@ void StationReceiver::onFrameReceived(const QByteArray& frame) {
     DataFrame dataFrame;
     dataFrame = frame;
     if (!dataFrame.isDataFrame()) {
-        logsModel_->log_error("收到损坏数据帧：" + dataFrame.raw().toHex());
+        logsModel_->log_error(tr("收到损坏数据帧：") + dataFrame.raw().toHex());
         DataFrame nakFrame;
         nakFrame.setNak(dataFrame.address());
         emit frameSendRequested(nakFrame.raw());
@@ -25,8 +25,8 @@ void StationReceiver::onFrameReceived(const QByteArray& frame) {
     auto id = dataFrame.address();
     beginResetModel();
     frameMap_.insert(id, dataFrame);
-    logsModel_->log_info(QString("收到数据帧[") + QString::number(dataFrame.address()) +
-                         QString("]：") + dataFrame.data());
+    logsModel_->log_info(QString(tr("收到数据帧[")) + QString::number(dataFrame.address()) +
+                         QString(tr("]：")) + dataFrame.data());
     DataFrame ackFrame;
     ackFrame.setAck(dataFrame.address());
     emit frameSendRequested(ackFrame.raw());

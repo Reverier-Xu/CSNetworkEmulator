@@ -65,9 +65,11 @@ QHash<int, QByteArray> LogsModel::roleNames() const {
 }
 
 void LogsModel::clear() {
-    beginRemoveRows(QModelIndex(), 0, logs_.size() - 1);
-    logs_.clear();
-    endRemoveRows();
+    if (!logs_.isEmpty()) {
+        beginRemoveRows(QModelIndex(), 0, logs_.size() - 1);
+        logs_.clear();
+        endRemoveRows();
+    }
 }
 
 void LogsModel::log(const QColor &color, const QString &message) {

@@ -18,11 +18,11 @@ Bridge::~Bridge() = default;
 
 void Bridge::onSenderRequested(const QByteArray& frame) {
     auto p =  QRandomGenerator::global()->generateDouble();
-    qDebug() << "LOST: " << p;
+    qDebug() << "Lost ratepoint is: " << p;
     DataFrame dataFrame;
     dataFrame = frame;
     if (p < lostRate_) {
-        qDebug() << "LOST!";
+        qDebug() << "FRAME LOST!";
         emit toReceiver(dataFrame.address(), false);
         return;
     }

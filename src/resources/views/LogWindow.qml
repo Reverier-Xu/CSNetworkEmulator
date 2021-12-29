@@ -86,6 +86,20 @@ Rectangle {
                 contentLogColor: logColor
                 timeLog: logTime
             }
+
+            highlightRangeMode: ListView.StrictlyEnforceRange
+            preferredHighlightBegin: 0
+            preferredHighlightEnd: height - 32
+
+            Timer {
+                interval: 100
+                repeat: true
+                running: true
+                onTriggered: {
+                    let index = senderLogList.count - 1
+                    senderLogList.currentIndex = index
+                }
+            }
         }
     }
 
@@ -138,6 +152,19 @@ Rectangle {
                 contentLog: logMessage
                 contentLogColor: logColor
                 timeLog: logTime
+            }
+
+            highlightRangeMode: ListView.StrictlyEnforceRange
+            preferredHighlightBegin: 0
+            preferredHighlightEnd: height
+            Timer {
+                interval: 100
+                repeat: true
+                running: true
+                onTriggered: {
+                    let index = receiverLogList.count - 1
+                    receiverLogList.currentIndex = index
+                }
             }
         }
     }

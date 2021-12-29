@@ -69,7 +69,7 @@ void StationSender::stop() {
 }
 
 void StationSender::sendNextFrame() {
-    qDebug() << "Ready to send next frame.";
+    // qDebug() << "Ready to send next frame.";
     if (bufferPosition() >= frameQueue_.size()) {
         logsModel_->log_success("全部发送完毕！");
         stop();
@@ -92,14 +92,17 @@ void StationSender::sendNextFrame() {
                 continue;
             }
             // send the frame
+            logsModel_->log_error("数据帧[" + QString::number(frameQueue_[i].address()) + "]超时! 重发...");
             emit frameSendRequested(frameQueue_[i].raw());
             setBufferSendCursor(i);
             return;
         }
     } else {
         // send the frame
-        if (bufferSendCursor() < frameQueue_.size())
+        if (bufferSendCursor() < frameQueue_.size()) {
+            logsModel_->log_warning("正在发送数据帧[" + QString::number(frameQueue_[bufferSendCursor()].address()) + "]...");
             emit frameSendRequested(frameQueue_[bufferSendCursor()].raw());
+        }
         setBufferSendCursor(bufferSendCursor() + 1);
         return;
     }
@@ -131,7 +134,7 @@ void StationSender::onFrameReceived(QByteArray frame) {
     DataFrame dataFrame;
     dataFrame = frame;
     if (!dataFrame.isAckFrame() && !dataFrame.isNakFrame()) {
-        logsModel_->log_warning("收到损坏帧：" + dataFrame.raw().toHex());
+        logsModel_->log_error("BROKEN: 收到损坏帧：" + dataFrame.raw().toHex());
         return;
     }
     beginResetModel();
@@ -139,11 +142,11 @@ void StationSender::onFrameReceived(QByteArray frame) {
     if (dataFrame.isAckFrame()) {
         frameState_[authorizedId] = true;
         // move buffer position
-        if (frameState_[bufferPosition()])
-            logsModel_->log_info("数据帧[" + QString::number(bufferPosition()) +
+        if (bufferPosition() < frameQueue_.size() && frameState_[bufferPosition()])
+            logsModel_->log_success("ACK: 数据帧[" + QString::number(authorizedId) +
                                  "]与之前的帧全部成功抵达。");
         else {
-            logsModel_->log_info("数据帧[" + QString::number(bufferPosition()) +
+            logsModel_->log_info("ACK: 数据帧[" + QString::number(authorizedId) +
                                  "]帧已抵达。");
         }
         while (bufferPosition() < frameQueue_.size() && frameState_[bufferPosition()]) {
@@ -152,7 +155,7 @@ void StationSender::onFrameReceived(QByteArray frame) {
         emit bufferPositionChanged(bufferPosition());
     } else if (dataFrame.isNakFrame()) {
         frameState_[authorizedId] = false;
-        logsModel_->log_info("数据帧[" + QString::number(authorizedId) +
+        logsModel_->log_error("NAK: 数据帧[" + QString::number(authorizedId) +
                              "]抵达失败，重新发送。");
         emit frameSendRequested(frameQueue_[authorizedId].raw());
     }

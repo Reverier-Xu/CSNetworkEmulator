@@ -7,6 +7,10 @@ set(CMAKE_MODULE_PATH
         ${CMAKE_MODULE_PATH}
         ${ECM_MODULE_PATH})
 
+if(MSVC)
+    set(CMAKE_CXX_FLAGS "/source-charset:utf-8 /execution-charset:utf-8")
+endif()
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(QT_MIN_VERSION 5.6.0)
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core Gui Widgets OpenGL Quick)
