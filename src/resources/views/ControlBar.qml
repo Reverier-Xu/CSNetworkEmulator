@@ -44,13 +44,24 @@ Rectangle {
 
     TextLabel {
         id: sendIntervalTips
+        anchors.right: networkDelayTips.left
+        anchors.rightMargin: 12
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        showIcon: true
+        icon: "qrc:/assets/history.svg"
+        text: "发包间隔 :  1700 ms"
+    }
+
+    TextLabel {
+        id: networkDelayTips
         anchors.right: parent.right
         anchors.rightMargin: 25
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         showIcon: true
-        icon: "qrc:/assets/history.svg"
-        text: "发包间隔 :  500 ms"
+        icon: "qrc:/assets/filter.svg"
+        text: "网络延迟 :  800 ms"
     }
 
     Rectangle {

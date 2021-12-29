@@ -84,8 +84,9 @@ Rectangle {
         anchors.right: colorStyleButton.left
         anchors.rightMargin: 12
         anchors.verticalCenter: parent.verticalCenter
-        text: "R.X.Fx"
-        contentColor: display.alertColor
+        text: "RX.UI"
+        bold: true
+        contentColor: display.themeColor
         showIcon: false
         color: "#30808080"
         radius: 4
