@@ -40,3 +40,7 @@ bin/CSNetworkEmulator
 ## 截图
 
 ![](arts/screenshot.png)
+
+## License
+
+Mozilla Public License v2.0
